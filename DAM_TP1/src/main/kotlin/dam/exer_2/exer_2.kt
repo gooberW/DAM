@@ -3,8 +3,7 @@ package org.example.dam.exer_2
 
 fun main() {
     var mode = selectMode()
-    while (!mode.equals("")) {
-
+    while (mode != 0) {
         runCalc(mode)
         mode = selectMode()
     }
@@ -16,8 +15,18 @@ fun selectMode():Int {
     println("1 - Arithmetic")
     println("2 - Boolean")
     println("3 - Bitwise Operations")
+    println("0 - EXIT")
 
-    return readln().toInt()
+    var input = readln()
+    var default = 0
+
+    if (input == ""){
+        println("Exiting the app...")
+        return default
+    } else {
+        return input.toInt()
+    }
+
 }
 
 fun runCalc(mode:Int) {
@@ -28,9 +37,6 @@ fun runCalc(mode:Int) {
         2 -> result = showBoolOp()
         3 -> result = showShiftOp()
     }
-
-
-
 
     println("Result: ${result}")
 }
@@ -47,8 +53,6 @@ fun showArithmeticOp():Any {
     println("MUL - Multiplication")
     println("DIV - Division")
 
-
-
     return handleArithmetic(num1, num2, readln())
 }
 
@@ -58,7 +62,7 @@ fun showBoolOp(): Boolean {
     println("Type the second value (true or false):")
     val val2 = readln().toBoolean();
 
-    print("Select the intended operation typing the 3 letter code from the following list:")
+    println("Select the intended operation typing the 3 letter code from the following list:")
     println("AND - Boolean AND")
     println("OR - Boolean OR")
     println("NOT - Boolean NOT")
