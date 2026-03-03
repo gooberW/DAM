@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">System Info</string>
+    <string name="hello_world_optional">Hello World Optional</string>
+    <string name="placeholder">Loading system info...</string>
+</resources>
