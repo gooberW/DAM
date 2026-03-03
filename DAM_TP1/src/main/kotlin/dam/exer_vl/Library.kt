@@ -1,10 +1,22 @@
 package org.example.dam.exer_vl
 
 class Library(name: String) {
+
+    companion object Tracker {
+
+        var numBooksAdded = 0
+
+        fun getTotalBooksCreated():Int {
+            return numBooksAdded
+        }
+    }
+
     var books = mutableListOf<Book>()
 
     fun addBook(book: Book) {
         books.add(book)
+
+        Tracker.numBooksAdded++
     }
 
     fun borrowBook(title: String) {
@@ -43,7 +55,7 @@ class Library(name: String) {
     fun showBooks(){
         //print details of all books
         books.forEach{
-            println(it.getDetails())
+            println(it)
         }
     }
 

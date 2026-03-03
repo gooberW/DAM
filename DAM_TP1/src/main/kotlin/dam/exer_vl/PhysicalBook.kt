@@ -9,8 +9,8 @@ class PhysicalBook(
     val hasHardcover: Boolean = true
 ) : Book(title, author, publicationYear, availableCopies) {
 
-    override fun getDetails():String {
-        return super.getDetails() + ", Storage: Physical, Weight: ${weight}g, Has Hardcover?: ${hardcover}"
+    override fun getStorageInfo():String {
+        return "Storage: Physical, Weight: ${weight}, hasHardcover: ${hardcover}"
     }
 
     val hardcover : String

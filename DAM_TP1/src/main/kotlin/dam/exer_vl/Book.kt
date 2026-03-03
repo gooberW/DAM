@@ -1,6 +1,6 @@
 package org.example.dam.exer_vl
 
-open class Book (
+abstract class Book (
     val title : String,
     val author : String,
     val publicationYear : Int,
@@ -25,9 +25,11 @@ open class Book (
             }
         }
 
-    open fun getDetails(): String{
-        return "Title: ${title}, Author: ${author}, Era: ${getEra()}, " +
-                "Available: ${availableCopies} copies"
+    abstract fun getStorageInfo():String
+
+    override fun toString(): String {
+        return "Title: ${title}, Author: ${author}, Era: ${getEra()}, Available Copies: ${availableCopies}, " +
+                getStorageInfo()
     }
 
     init{

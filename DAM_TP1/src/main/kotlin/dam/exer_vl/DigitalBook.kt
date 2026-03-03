@@ -9,7 +9,7 @@ class DigitalBook(
     val format: String
 ) : Book(title, author, publicationYear, availableCopies) {
 
-    override fun getDetails():String {
-       return super.getDetails() + ", Storage: Digital, File Size: ${fileSize} MB, Format: ${format}"
+    override fun getStorageInfo():String {
+        return "Storage: Digital, File Size: ${fileSize}, Format: ${format}"
     }
 }
