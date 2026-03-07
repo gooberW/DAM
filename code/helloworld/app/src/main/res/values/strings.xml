@@ -5,4 +5,5 @@
     <string name="isel_game_studios">ISEL Game Studios</string>
     <string name="activity_oncreate_msg">\"Activity %1$s onCreate\"</string>
     <string name="type_your_name">Type your name</string>
+    <string name="reset_text">Reset Text</string>
 </resources>

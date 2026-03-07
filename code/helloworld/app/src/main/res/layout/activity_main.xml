@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="228dp"
         android:text="@string/hello_world"
+        android:textColor="#C3C3C3"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="80dp"
         app:cardBackgroundColor="#141414"
@@ -34,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,11 +55,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/type_your_name"
-                android:textSize="20sp"
-                android:maxLines="1"
                 android:imeOptions="actionDone"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/resetBtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="200dp"
+        android:background="@color/black"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="@string/reset_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColorLink="#FFFFFF"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchContainer"
+        app:layout_constraintVertical_bias="0.52" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
