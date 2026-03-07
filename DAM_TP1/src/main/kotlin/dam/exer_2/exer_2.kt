@@ -104,10 +104,11 @@ fun handleBoolean(val1: Boolean, val2: Boolean, operation: String): Boolean {
 }
 
 fun handleShift(hexNum: Int, shift: Int, operation: String):Any {
-    when(operation) {
-        "SHL" -> return (hexNum shl shift)
-        "SHR" -> return (hexNum shr shift)
+    val result: Int = when(operation) {
+        "SHL" -> hexNum shl shift
+        "SHR" -> hexNum shr shift
+        else -> throw IllegalArgumentException("Operação Inválida")
     }
 
-    return "No result"
+    return "HEX: 0x${Integer.toHexString(result).uppercase()}, INT: ${result}"
 }
