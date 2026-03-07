@@ -40,9 +40,14 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="527dp" />
+        android:layout_marginTop="467dp"
+        app:cardBackgroundColor="#141414"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
