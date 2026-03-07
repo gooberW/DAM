@@ -16,5 +16,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        println(getString(R.string.activity_oncreate_msg,
+            this@MainActivity.localClassName))
     }
 }
