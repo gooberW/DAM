@@ -1,4 +1,4 @@
-package org.example.dam.exer_2
+package tp1.dam.exer_2
 
 
 fun main() {

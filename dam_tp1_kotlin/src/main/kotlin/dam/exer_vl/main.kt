@@ -1,4 +1,4 @@
-package org.example.dam.exer_vl
+package tp1.dam.exer_vl
 
 fun main() {
     val centralLib = Library("Central Library")

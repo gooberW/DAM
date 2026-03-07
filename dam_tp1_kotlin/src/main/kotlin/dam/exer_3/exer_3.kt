@@ -1,4 +1,4 @@
-package org.example.dam.exer_3
+package tp1.dam.exer_3
 
 /*
 A ball is dropped from a height of 100 meters. Each time it bounces, it reaches 60% of its

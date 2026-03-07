@@ -1,4 +1,4 @@
-package org.example.dam.exer_1
+package tp1.dam.exer_1
 
 import kotlin.collections.MutableList as MutableList
 
