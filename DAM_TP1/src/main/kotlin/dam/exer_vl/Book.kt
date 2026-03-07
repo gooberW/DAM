@@ -6,13 +6,12 @@ abstract class Book (
     val publicationYear : Int,
     val initialCopies: Int
 ) {
-    fun getEra():String {
-        when {
-            publicationYear < 1980 -> return "Classic"
-            publicationYear in 1980..2010 -> return "Modern"
-            else -> return "Contemporary"
+    val era:String
+        get() {
+            return if (publicationYear < 1980) "Classic"
+            else if (publicationYear in 1980..2010) "Modern"
+            else "Contemporary"
         }
-    }
 
     var availableCopies: Int = initialCopies
         set(ammount) {
@@ -21,14 +20,14 @@ abstract class Book (
             field = ammount
 
             if(ammount == 0) {
-                println("Warning: Book is now out of stock!")
+                println("[Warning] '${title}' is now out of stock!")
             }
         }
 
     abstract fun getStorageInfo():String
 
     override fun toString(): String {
-        return "Title: ${title}, Author: ${author}, Era: ${getEra()}, Available Copies: ${availableCopies}, " +
+        return "Title: ${title}, Author: ${author}, Era: ${era}, Available Copies: ${availableCopies}, " +
                 getStorageInfo()
     }
 

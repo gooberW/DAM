@@ -14,7 +14,7 @@ fun main() {
     // a cada bounce a altura é 60% da anterior
     println("Calculating bounces...")
     val bounces = generateSequence(initHeight * bounce) { it * bounce}.takeWhile{it>= 1.0}.toList()
-    // usa-se op takeWhile porque nao sabemos quantos valores satisfazem a condição, assim impede-se que o
+    // usa-se o takeWhile porque nao sabemos quantos valores satisfazem a condição, assim impede-se que o
     // programa fique preso a procura de valores que nunca vao satisfazer.
 
     println("Bounce heights:")
