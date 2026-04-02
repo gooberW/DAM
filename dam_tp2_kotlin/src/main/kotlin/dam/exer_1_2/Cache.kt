@@ -1,4 +1,4 @@
-package main.kotlin.dam.exer_1_2
+package dam.exer_1_2
 
 class Cache<K : Any, V : Any > {
 

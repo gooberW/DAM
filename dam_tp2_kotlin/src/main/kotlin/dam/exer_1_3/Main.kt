@@ -1,4 +1,4 @@
-package main.kotlin.dam.exer_1_3
+package dam.exer_1_3
 
 fun main() {
     

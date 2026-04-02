@@ -1,4 +1,9 @@
-package main.kotlin.dam.exer_1_1
+package dam.exer_1_1
+
+import dam.exer_1_1.Event
+import dam.exer_1_1.filterByUser
+import dam.exer_1_1.processEvents
+import dam.exer_1_1.totalSpent
 
 fun main() {
     val events = listOf (

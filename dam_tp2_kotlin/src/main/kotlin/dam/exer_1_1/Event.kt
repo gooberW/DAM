@@ -1,4 +1,4 @@
-package main.kotlin.dam.exer_1_1
+package dam.exer_1_1
 
 sealed class Event(val username: String, val timestamp: Long) {
 
