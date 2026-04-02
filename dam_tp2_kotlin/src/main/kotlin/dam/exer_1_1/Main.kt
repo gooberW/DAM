@@ -1,4 +1,4 @@
-package exer_1_1
+package main.kotlin.dam.exer_1_1
 
 fun main() {
     val events = listOf (
