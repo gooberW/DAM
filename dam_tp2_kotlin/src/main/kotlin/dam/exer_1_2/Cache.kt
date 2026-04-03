@@ -30,4 +30,29 @@ class Cache<K : Any, V : Any > {
 
         return cache[key]
     }
+
+    fun transform(key: K, action: (V) -> V) : Boolean {
+        if(cache[key] != null) { // key exists
+            cache[key] = action(cache[key] as V)
+            return true
+        }
+        return false;
+    }
+
+    fun snapshot(): Map<K, V> {
+        return cache.toMap();
+    }
+
+    //challenge
+    fun filterValues(predicate: (V) -> Boolean): Map<K, V> {
+        //return cache.filterValues(predicate)
+
+        val result = mutableMapOf<K, V>();
+        for((key, value) in cache) {
+            if(predicate(value)) {
+                result[key] = value
+            }
+        }
+        return result.toMap()
+    }
 }
