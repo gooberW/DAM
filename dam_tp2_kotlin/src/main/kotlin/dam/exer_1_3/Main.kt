@@ -24,7 +24,7 @@ fun main() {
 
     println("After compose:")
     pipeline.describe()
-    
+
     println()
     println("Result:")
     pipeline.execute(logs).forEach { println(it) }
