@@ -43,3 +43,8 @@ data class Vec2(var x: Double, var y: Double): Comparable<Vec2> {
         else -> throw IndexOutOfBoundsException("Index $index out of bounds, Vec2 only has indices 0 and 1")
     }
 }
+
+// CHALLENGE
+operator fun Double.times(vector: Vec2): Vec2 {
+    return Vec2(this * vector.x, this * vector.y) // o this representa um double
+}

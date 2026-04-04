@@ -25,6 +25,7 @@
       - [Magnitude, Dot Product and Normalization](#magnitude-dot-product-and-normalization)
       - [Index Operator](#index-operator)
       - [Comparison Operator](#comparison-operator)
+    - [Challenge](#challenge)
     - [4.5. Cool Weather App (Android)](#45-cool-weather-app-android)
   - [5. Testing and Validation](#5-testing-and-validation)
   - [6. Usage Instructions](#6-usage-instructions)
@@ -165,6 +166,19 @@ operator fun get(index: Int): Double = when (index) {
 magnitude. This unlocks relational operators (`<`, `>`, `<=`, `>=`) as well as
 standard library functions such as `max()` and `sorted()` on collections
 of `Vec2`.
+
+### Challenge
+
+Left-hand scalar multiplication (`2.0 * v`) cannot be defined as a member
+function on `Vec2` because the left-hand operand is `Double`, a type we don't
+control. Kotlin solves this with extension functions. By defining
+`operator fun Double.times(v: Vec2)` outside the class, the compiler maps
+`2.0 * v` to this function, making scalar multiplication commutative.
+
+Destructuring allows a `Vec2` to be unpacked into individual variables with
+`val (x, y) = a`. Since `Vec2` is a `data class`, the `component1()` and
+`component2()` operator functions are generated automatically for each property
+in declaration order, so no additional code is required.
 
 ### 4.5. Cool Weather App (Android)
 
