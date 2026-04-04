@@ -35,7 +35,7 @@
       - [Magnitude, Dot Product and Normalization](#magnitude-dot-product-and-normalization)
       - [Index Operator](#index-operator)
       - [Comparison Operator](#comparison-operator)
-    - [Challenge](#challenge-2)
+      - [Challenge](#challenge-2)
     - [4.5. Cool Weather App (Android)](#45-cool-weather-app-android)
   - [5. Testing and Validation](#5-testing-and-validation)
   - [6. Usage Instructions](#6-usage-instructions)
@@ -312,7 +312,7 @@ magnitude. This unlocks relational operators (`<`, `>`, `<=`, `>=`) as well as
 standard library functions such as `max()` and `sorted()` on collections
 of `Vec2`.
 
-### Challenge
+#### Challenge
 
 Left-hand scalar multiplication (`2.0 * v`) cannot be defined as a member
 function on `Vec2` because the left-hand operand is `Double`, a type we don't
