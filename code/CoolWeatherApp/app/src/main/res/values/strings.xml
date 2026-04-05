@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cool Weather App</string>
+    <string name="_temperature">00º</string>
+    <string name="sea_level_pressure">Sea Level Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind Speed</string>
+</resources>
