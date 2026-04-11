@@ -327,9 +327,11 @@ in declaration order, so no additional code is required.
 
 The Cool Weather App is an Android application developed in Kotlin that retrieves and displays real-time weather data based on user-provided geographic coordinates (latitude and longitude). Weather data is obtained from the Open-Meteo API using an HTTP request built dynamically with the provided input values.
 
-Network communication is handled on a background thread to avoid blocking the main UI thread. The response from the API is received in JSON format and parsed into Kotlin data classes using the Gson library. After parsing, the UI is updated using ``runOnUiThread`` to ensure thread safety.
+Network communication is handled on a background thread to avoid blocking the main UI thread. The response from the API is received in JSON format and parsed into Kotlin data classes using the Gson library. After parsing, the UI is updated using ``runOnUiThread()``[^6] to ensure thread safety.
 
-The application displays key meteorological parameters including current temperature, wind speed, wind direction, humidity, and atmospheric pressure. The current weather conditions are identified using WMO weather codes returned by the API.
+[^6]: Medium, Yossi Segev, Understanding Activity.runOnUiThread() (https://medium.com/@yossisegev/understanding-activity-runonuithread-e102d388fe93)
+
+The application displays some meteorological parameters including current temperature, wind speed, wind direction, humidity, and atmospheric pressure. The current weather conditions are identified using WMO weather codes returned by the API.
 
 Instead of using hardcoded mappings, weather codes are linked to application resources using XML arrays. These arrays define mappings between weather codes, descriptions, icons, and background images, that can be seen in the listing 6 below. The application retrieves the correct index for a given weather code and uses it to access the corresponding resources. This approach improves maintainability by separating logic from static data.
 
