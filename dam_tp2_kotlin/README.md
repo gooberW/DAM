@@ -53,20 +53,17 @@ the Android development environment. The objective was to explore different
 concepts of the Kotlin language and...
 
 ## 2. System Overview
-The project is divided into individual exercises, to demonstrate specific programming and development concepts:
+The project is divided into individual exercises, each designed to demonstrate specific Kotlin and Android development concepts.
 
-- **Exercise 1.1:** Sealed classes, extension functions and high-order functions.
+**Exercise 1.1** focuses on sealed classes, extension functions, and higher-order functions. It demonstrates how Kotlin can be used to model restricted hierarchies of types and how functions can be passed and reused to create more flexible and reusable code.
 
-- **Exercise 1.2:** Generic in-memory cache.
-  - **Challenge:**
+**Exercise 1.2** implements a generic in-memory cache. The main goal is to understand generics and type safety in Kotlin. A challenge feature is the implementation of a filterValues function, which uses a predicate to return only values that match a given condition.
 
-- **Exercise 1.3:** Data processing pipeline in Kotlin using lambdas.
-    - **Challenge:**
-  
-- **Exercise 1.4:** Mathematical 2D vector library.
-    - **Challenge:** 
-  
-- **Android - The Cool Weather App:** 
+**Exercise 1.3** develops a data processing pipeline using Kotlin lambdas. This exercise demonstrates functional programming concepts such as chaining operations. The challenge part includes implementing compose and fork functions to combine and split processing flows.
+
+**Exercise 1.4 **involves building a mathematical 2D vector library. This exercise focuses on operator overloading and Kotlin language features such as left-hand multiplication support and destructuring declarations for cleaner syntax and usability.
+
+**Android - The Cool Weather App** is the final practical component of the project. It is an Android application developed in Android Studio that retrieves real-time weather data using the Open-Meteo API. The app processes weather information based on user location (latitude and longitude, or GPS in extended versions) and displays current conditions such as temperature, wind speed, humidity, and pressure. It also uses weather codes to dynamically select icons and background visuals, demonstrating API integration, asynchronous processing, and resource management in an Android environment.
 
 ## 3. Architecture and Design
 A modular package structure was used to keep exercises isolated and maintainable. This ensures that the namespace for each exercise remains clean.
@@ -168,7 +165,7 @@ temporary `MutableMap`. A final call to `toMap()` converts it to an immutable
 copy before returning, consistent with the principle of exposing read-only
 collections at the API boundary.
 
-> Listing W. ``filterValues`` function, from scratch.
+> Listing 1. ``filterValues`` function, from scratch.
 ```
 fun filterValues(predicate: (V) -> Boolean): Map<K, V> {
   //return cache.filterValues(predicate)
@@ -212,8 +209,9 @@ fundamental concept in functional programming.
 
 #### Receiver Lambdas
 
-`buildPipeline` accepts a lambda with `Pipeline` as its receiver, shown in the Listing X below.
+`buildPipeline` accepts a lambda with `Pipeline` as its receiver, shown in the Listing 2 below.
 
+> Listing 2. 
 ```
 fun buildPipeline(block: Pipeline.() -> Unit): Pipeline {
     val pipeline = Pipeline()
@@ -258,9 +256,9 @@ to `a.plus(b)`, making custom types feel as natural as built-in primitives.
 The `+`, `-`, and `*` operators produce a new `Vec2` instance, leaving operands
 unchanged. The `*` operator accepts a `Double` scalar rather than another `Vec2`,
 scaling both components uniformly, and the unary `-` negates both components,
-reversing the vector's direction, seen on the Listing X below.
+reversing the vector's direction, seen on the Listing 3 below.
 
->Listing X. Arithemtic operation examples.
+>Listing 3. Arithemtic operation examples.
 ```
 operator fun times(multiplier: Double): Vec2 {
   return Vec2(x * multiplier, y * multiplier)
@@ -279,7 +277,7 @@ divides each component by the magnitude, producing a unit vector of length 1.
 Since dividing by zero is undefined, normalizing a zero vector throws an
 `IllegalStateException`.
 
-> Listing Y. Normalization function.
+> Listing 4. Normalization function.
 ```
 fun normalized(): Vec2 {
   if (magnitude() == 0.0) {
@@ -294,9 +292,9 @@ fun normalized(): Vec2 {
 
 The `get` operator enables bracket notation (`a[0]`, `a[1]`), mapping index `0`
 to `x` and `1` to `y`. Any other index throws an `IndexOutOfBoundsException` 
-with an error message, seen in the Listing Z below.
+with an error message, seen in the Listing 5 below.
 
-> Listing Z. Implementation of the ``get`` operator.
+> Listing 5. Implementation of the ``get`` operator.
 ```
 operator fun get(index: Int): Double = when (index) {
   0 -> x
@@ -327,16 +325,38 @@ in declaration order, so no additional code is required.
 
 ### 4.5. Cool Weather App (Android)
 
+The Cool Weather App is an Android application developed in Kotlin that retrieves and displays real-time weather data based on user-provided geographic coordinates (latitude and longitude). Weather data is obtained from the Open-Meteo API using an HTTP request built dynamically with the provided input values.
 
+Network communication is handled on a background thread to avoid blocking the main UI thread. The response from the API is received in JSON format and parsed into Kotlin data classes using the Gson library. After parsing, the UI is updated using ``runOnUiThread`` to ensure thread safety.
+
+The application displays key meteorological parameters including current temperature, wind speed, wind direction, humidity, and atmospheric pressure. The current weather conditions are identified using WMO weather codes returned by the API.
+
+Instead of using hardcoded mappings, weather codes are linked to application resources using XML arrays. These arrays define mappings between weather codes, descriptions, icons, and background images, that can be seen in the listing 6 below. The application retrieves the correct index for a given weather code and uses it to access the corresponding resources. This approach improves maintainability by separating logic from static data.
+
+> Listing 6. Snippet of resource file containing the icons, backgrounds and weather codes.
+```
+...
+
+<array name="weather_icons">
+    <item>@drawable/sunny_icon</item>
+    <item>@drawable/sunny_icon</item>
+    <item>@drawable/sunny_icon</item>
+
+    ...
+
+</array>
+```
+
+Weather icons are applied dynamically using ``ImageView.setImageResource``, while the background of the main layout is updated based on the weather condition category (e.g., clear vs overcast). A simplified visual system is used where only two main background states are supported.
+
+Basic input validation is implemented to ensure that latitude and longitude values are numeric before making the API request. If invalid input is detected, the app displays a ``Toast`` message.
+
+The application uses standard Android components such as ``AppCompatActivity``, ``ConstraintLayout``, and view binding through ``findViewById``. External dependencies include Gson for JSON deserialization and AndroidX libraries for core UI functionality.
 
 ## 5. Testing and Validation
 **Testing Strategy:** Functional testing was performed by running the console applications in IntelliJ and deploying the Android apps to the Pixel 9 Pro AVD.
 
-**Edge Cases:** Validation against non-numeric input and division by zero was implemented for the Calculator.
-
-**Virtual Library:** Borrowing logic was validated against out-of-stock scenarios, and negative copy counts were prevented via setters.
-
-**Logcat:** The Logcat monitor in Android Studio was used to verify lifecycle messages (onCreate) and debug variable states.
+(...)
 
 ## 6. Usage Instructions
 1. **Requirements:** Android Studio, IntelliJ IDEA, and Kotlin SDK.
@@ -345,7 +365,7 @@ in declaration order, so no additional code is required.
 then navigate to the `dam/` package. To run the programs, go to each exercise's ``Main.kt`` 
 and click the "Run" icon.
 
-> **Diagram 2.** Directory diagram of kotlin project structure.
+> Diagram 2. Directory diagram of kotlin project structure.
 ```
 dam_tp2_kotlin/
 └── src/
@@ -355,7 +375,7 @@ dam_tp2_kotlin/
                 └── (...)
 ```
 
-3. **Execution (Android):** 
+3. **Execution (Android):** Go into Android Studio and run the application on the PIxel 9 Pro AVD. To see weather changes, write latitude and longitude values into the respective inputs and update.
 
 ---
 
@@ -365,13 +385,19 @@ GitHub Desktop was used throughout the development process. Commits were made af
 
 > Note: Some commits only include progress checkpoints with unfinished code.
 ## 8. Difficulties and Lessons Learned
-Reflecting on the development process, several technical challenges were encountered that deepened our understanding of Kotlin’s features and development best practices.
+During the development of the Cool Weather App, several technical challenges were encountered. One of the main difficulties was handling asynchronous network calls correctly. Since Android does not allow network operations on the main thread, background threading had to be implemented to fetch weather data without freezing the UI.
+
+A further issue was the handling of weather codes and resource mapping. Early implementations used hardcoded values, which made the system difficult to maintain. This was improved by moving mappings into XML resource arrays, which allowed better separation of data and logic. However, aligning indexes across multiple arrays (codes, icons, descriptions, backgrounds) required careful consistency to avoid mismatches.
+
+Additionally, selecting appropriate weather icons and backgrounds highlighted the importance of clean resource management. Initial implementations using string-based resource lookup caused inefficiencies and were replaced with more structured approaches.
 
 
 ## 9. Future Improvements
-A GUI could be implemented to manage the virtual library, together with data storage, either in XML or JSON files.
+In future versions of the Cool Weather App, several enhancements could improve both functionality and user experience. A key improvement would be expanding the set of weather backgrounds and icons to more accurately represent different weather conditions instead of using only two main background states.
+
+The app could also benefit from adding simple animations, such as transitions when weather conditions change or animated icons for dynamic weather effects like rain or clouds. This would make the interface more visually engaging.
+
+Finally, refactoring the project into a more structured architecture (such as MVVM) would improve scalability and maintainability as the application grows.
 
 ## 10. AI Usage Disclosure (Mandatory)
 Artificial Intelligence was only used to draft this report, namely ``Claude`` and ``ChatGPT``. All code in this project was developed manually, with assistance from official documentation.
-
----
