@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="weather_codes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>45</item>
+        <item>48</item>
+        <item>51</item>
+        <item>53</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>61</item>
+        <item>63</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>71</item>
+        <item>73</item>
+        <item>75</item>
+        <item>77</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>85</item>
+        <item>86</item>
+        <item>95</item>
+        <item>96</item>
+        <item>99</item>
+    </array>
+
+    <array name="weather_descriptions">
+        <item>Clear sky</item>
+        <item>Mainly clear</item>
+        <item>Partly cloudy</item>
+        <item>Overcast</item>
+        <item>Fog</item>
+        <item>Rime fog</item>
+        <item>Light drizzle</item>
+        <item>Moderate drizzle</item>
+        <item>Dense drizzle</item>
+        <item>Light freezing drizzle</item>
+        <item>Dense freezing drizzle</item>
+        <item>Light rain</item>
+        <item>Moderate rain</item>
+        <item>Heavy rain</item>
+        <item>Light freezing rain</item>
+        <item>Heavy freezing rain</item>
+        <item>Light snow</item>
+        <item>Moderate snow</item>
+        <item>Heavy snow</item>
+        <item>Snow grains</item>
+        <item>Light rain showers</item>
+        <item>Moderate rain showers</item>
+        <item>Violent rain showers</item>
+        <item>Light snow showers</item>
+        <item>Heavy snow showers</item>
+        <item>Thunderstorm</item>
+        <item>Thunderstorm with hail</item>
+    </array>
+
+    <!-- ICONS -->
+    <array name="weather_icons">
+        <item>@drawable/sunny_icon</item>
+        <item>@drawable/sunny_icon</item>
+        <item>@drawable/sunny_icon</item>
+
+        <item>@drawable/overcast_icon</item>
+        <item>@drawable/overcast_icon</item>
+        <item>@drawable/overcast_icon</item>
+
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
+
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
+
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
+
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+        <item>@drawable/rain_icon</item>
+
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
+
+        <item>@drawable/thunder_icon</item>
+        <item>@drawable/thunder_icon</item>
+        <item>@drawable/thunder_icon</item>
+    </array>
+
+    <!-- BACKGROUNDS (ONLY 2 STATES) -->
+    <array name="weather_backgrounds">
+
+        <!-- SUNNY (0,1,2) -->
+        <item>@drawable/clear_sky_day</item>
+        <item>@drawable/clear_sky_day</item>
+        <item>@drawable/clear_sky_day</item>
+
+        <!-- EVERYTHING ELSE -->
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+        <item>@drawable/overcast_sky_day</item>
+
+    </array>
+
+</resources>

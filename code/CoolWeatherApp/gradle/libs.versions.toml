@@ -11,6 +11,7 @@ constraintlayout = "2.2.1"
 cardview = "1.0.0"
 recyclerview = "1.4.0"
 gson = "2.10.1"
+playServicesLocation = "21.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,6 +25,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+gms-location = { group = "com.google.android.gms", name = "play-services-location", version = "21.3.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

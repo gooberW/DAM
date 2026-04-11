@@ -1,5 +1,7 @@
 package dam.a51692.coolweatherapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -7,19 +9,25 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresPermission // para a loc
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.io.InputStreamReader
 import java.net.URL
 import com.google.gson.Gson
+import dam.a51692.coolweatherapp.utils.WeatherUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var fusedLocationClient: FusedLocationProviderClient;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,15 +57,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // lat e lon aleatorias quando entras na app pela 1a vez
-
-        val rndLat = Random.nextDouble(-90.0, 90.0).toFloat()
-        val rndLon = Random.nextDouble(-180.0, 180.0).toFloat()
-        curLocation.text = "${rndLat}, ${rndLon}"
-
-        fetchWeatherData(rndLat, rndLon)
-
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        setCurrentLocation();
     }
 
     private fun WeatherAPI_Call(lat: Float, long: Float): WeatherData {
@@ -86,18 +87,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI ( request : WeatherData ) {
         runOnUiThread {
             //images/icons
-            val weatherIcon = findViewById<ImageView>(R.id.weatherIcon)
-            val main = findViewById<ConstraintLayout>(R.id.main);
+            val code = request.current_weather.weathercode
 
-            var newIconID = getWeatherIconResource(request.current_weather.weathercode)
-            var newIcon = getDrawable(newIconID)
-            weatherIcon.setImageDrawable(newIcon)
+            val iconRes = WeatherUtils.getWeatherIcon(this, code)
+            val bgRes = WeatherUtils.getWeatherBackground(this, code)
 
-            if(newIconID != R.drawable.sunny_icon) {
-                main.setBackgroundResource(R.drawable.overcast_sky_day)
-            } else {
-                main.setBackgroundResource(R.drawable.clear_sky_day)
-            }
+            findViewById<ImageView>(R.id.weatherIcon).setImageResource(iconRes)
+            findViewById<ConstraintLayout>(R.id.main).setBackgroundResource(bgRes)
 
             //info
             val tempText = findViewById<TextView>(R.id.temperature)
@@ -108,52 +104,12 @@ class MainActivity : AppCompatActivity() {
 
             var index = getCurrentHourIndex(request.hourly.time)
 
-            tempText.text = "${request.current_weather.temperature}º"
+            tempText.text = "${request.current_weather.temperature.toInt()}º"
             windSpeedVal.text = "${request.current_weather.windspeed} km/h"
             windDirVal.text = "${request.current_weather.winddirection}°"
             humidityVal.text = "${request.hourly.relativehumidity_2m[index]}%"
             seaLvlPressureVal.text = "${request.hourly.pressure_msl[index]} hPa"
 
-        }
-    }
-
-    fun getWeatherIconResource(code: Int, isDay: Boolean = true): Int {
-        val weatherMap = getWeatherCodeMap()
-        val wCode = weatherMap[code] ?: WMO_WeatherCode.CLEAR_SKY
-
-        return when (wCode) {
-            WMO_WeatherCode.CLEAR_SKY,
-            WMO_WeatherCode.MAINLY_CLEAR,
-            WMO_WeatherCode.PARTLY_CLOUDY -> R.drawable.sunny_icon
-
-            WMO_WeatherCode.OVERCAST,
-            WMO_WeatherCode.FOG,
-            WMO_WeatherCode.DEPOSITING_RIME_FOG -> R.drawable.overcast_icon
-
-            WMO_WeatherCode.DRIZZLE_LIGHT,
-            WMO_WeatherCode.DRIZZLE_MODERATE,
-            WMO_WeatherCode.DRIZZLE_DENSE,
-            WMO_WeatherCode.RAIN_SLIGHT,
-            WMO_WeatherCode.RAIN_MODERATE,
-            WMO_WeatherCode.RAIN_HEAVY,
-            WMO_WeatherCode.RAIN_SHOWERS_SLIGHT,
-            WMO_WeatherCode.RAIN_SHOWERS_MODERATE,
-            WMO_WeatherCode.RAIN_SHOWERS_VIOLENT -> R.drawable.rain_icon
-
-            WMO_WeatherCode.FREEZING_DRIZZLE_LIGHT,
-            WMO_WeatherCode.FREEZING_DRIZZLE_DENSE,
-            WMO_WeatherCode.FREEZING_RAIN_LIGHT,
-            WMO_WeatherCode.FREEZING_RAIN_HEAVY,
-            WMO_WeatherCode.SNOW_FALL_SLIGHT,
-            WMO_WeatherCode.SNOW_FALL_MODERATE,
-            WMO_WeatherCode.SNOW_FALL_HEAVY,
-            WMO_WeatherCode.SNOW_GRAINS,
-            WMO_WeatherCode.SNOW_SHOWERS_SLIGHT,
-            WMO_WeatherCode.SNOW_SHOWERS_HEAVY -> R.drawable.freezing_icon
-
-            WMO_WeatherCode.THUNDERSTORM_SLIGHT_MODERATE,
-            WMO_WeatherCode.THUNDERSTORM_HAIL_SLIGHT,
-            WMO_WeatherCode.THUNDERSTORM_HAIL_HEAVY -> R.drawable.thunder_icon
         }
     }
 
@@ -163,6 +119,37 @@ class MainActivity : AppCompatActivity() {
 
         val index = hourlyTime.indexOf(currentTime)
 
-        return if (index != -1) index else 0 // fallback if not found
+        return if (index != -1) index else 0
+    }
+
+    private fun setCurrentLocation() {
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+            return
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+
+            if (location != null) {
+                val lat = location.latitude.toFloat()
+                val lon = location.longitude.toFloat()
+
+                findViewById<TextView>(R.id.curLocation).text = "$lat, $lon"
+
+                fetchWeatherData(lat, lon)
+            } else {
+                Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
