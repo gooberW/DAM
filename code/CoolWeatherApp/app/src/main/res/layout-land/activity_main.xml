@@ -16,7 +16,7 @@
         android:text="@string/_temperature"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#FFFFFF"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="100sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
         android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="#166CCE"
+        app:cardBackgroundColor="?attr/colorPrimary"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:contentPadding="15dp"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:text="Lat:"
-                android:textColor="#FFFFFF" />
+                android:textColor="?attr/colorOnPrimary" />
 
             <EditText
                 android:id="@+id/latitudeInput"
@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberSigned"
-                android:textColor="#FFFFFF"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="14sp" />
 
             <TextView
@@ -82,7 +82,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:text="Lon:"
-                android:textColor="#FFFFFF" />
+                android:textColor="?attr/colorOnPrimary" />
 
             <EditText
                 android:id="@+id/longitudeInput"
@@ -91,7 +91,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberSigned"
-                android:textColor="#FFFFFF"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -113,7 +113,7 @@
             android:layout_width="165dp"
             android:layout_height="90dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="@color/containerLight"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:contentPadding="15dp">
@@ -127,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/humidity"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="0dp" />
@@ -137,7 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/humidity"
                     tools:layout_editor_absoluteX="4dp" />
@@ -150,7 +150,7 @@
             android:layout_width="165dp"
             android:layout_height="90dp"
 
-            app:cardBackgroundColor="@color/containerLight"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:contentPadding="15dp">
@@ -164,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sea_level_pressure"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="0dp" />
@@ -174,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/seaLvlPressure"
                     tools:layout_editor_absoluteX="4dp" />
@@ -191,9 +191,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="60dp"
-        android:backgroundTint="@color/containerLight"
+        android:backgroundTint="?attr/colorPrimary"
         android:padding="20dp"
-        android:text="Update"
+        android:text="@string/update"
         android:textSize="16sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -217,7 +217,7 @@
             android:layout_width="165dp"
             android:layout_height="90dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="#166CCE"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:contentPadding="15dp">
@@ -231,7 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/wind_speed"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="0dp" />
@@ -241,7 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/windSpeed"
                     tools:layout_editor_absoluteX="4dp" />
@@ -253,7 +253,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="165dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="@color/containerLight"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:contentPadding="15dp">
@@ -266,8 +266,8 @@
                     android:id="@+id/windDir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Wind Direction"
-                    android:textColor="#FFFFFF"
+                    android:text="@string/wind_direction"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="0dp" />
@@ -277,7 +277,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/windDir"
                     tools:layout_editor_absoluteX="4dp" />
@@ -295,7 +295,7 @@
         android:layout_marginStart="128dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperature" />
 

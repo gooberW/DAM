@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cool Weather App</string>
+    <string name="sea_level_pressure">Pressão ao Nível/Mar</string>
+    <string name="humidity">Humidade</string>
+    <string name="wind_speed">Velocidade do Vento</string>
+    <string name="invalid_coords">Coordenadas Inválidas</string>
+    <string name="current_location">Localização Atual:</string>
+    <string name="wind_direction">Direção do Vento</string>
+    <string name="update">Atualizar</string>
+</resources>

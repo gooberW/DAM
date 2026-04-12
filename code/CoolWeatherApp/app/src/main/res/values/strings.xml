@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Cool Weather App</string>
-    <string name="_temperature">00º</string>
+    <string name="_temperature" translatable="false">00º</string>
     <string name="sea_level_pressure">Sea Level Pressure</string>
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind Speed</string>
+    <string name="invalid_coords">Invalid Coordinates</string>
+    <string name="wind_direction">Wind Direction</string>
+    <string name="current_location">Current Location:</string>
+    <string name="update">Update</string>
 </resources>

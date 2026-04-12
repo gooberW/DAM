@@ -5,5 +5,6 @@ data class CurrentWeather (
     var windspeed : Float ,
     var winddirection : Int ,
     var weathercode : Int ,
-    var time : String
+    var time : String,
+    val is_day: Int
 )

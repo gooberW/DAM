@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="containerDark">#FF000000</color>
+    <color name="containerDark">#16004a</color>
     <color name="containerLight">#166CCE</color>
+    <color name="textLight">#FFFFFF</color>
+
 </resources>
