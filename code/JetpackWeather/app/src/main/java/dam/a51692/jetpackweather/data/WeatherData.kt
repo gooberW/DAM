@@ -1,4 +1,6 @@
-package dam.a51692.coolweatherapp
+package dam.a51692.jetpackweather.data
+
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeatherData (
