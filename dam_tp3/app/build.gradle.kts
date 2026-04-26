@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
+    kotlin("kapt")
 }
 
 group = "org.example"
@@ -11,12 +12,16 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(kotlin("stdlib-jdk8"))
+    // Include the annotations module
+    implementation (project(":annotations"))
+    // Use the annotation processor
+    kapt(project(":processor"))
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }
