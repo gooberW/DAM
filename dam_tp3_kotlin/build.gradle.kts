@@ -11,12 +11,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(kotlin("script-runtime"))
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
 }

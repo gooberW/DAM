@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm")
     kotlin("kapt")
 }
 
@@ -12,17 +12,14 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(kotlin ("stdlib"))
-
     // Include the annotations module
-    implementation(project(":annotations"))
-
+    implementation (project(":annotations"))
     // Use the annotation processor
-    kapt (project(":processor"))
+    kapt(project(":processor"))
 }
 
 tasks.test {
-    useJUnitPlatform ()
+    useJUnitPlatform()
 }
 
 kotlin {
