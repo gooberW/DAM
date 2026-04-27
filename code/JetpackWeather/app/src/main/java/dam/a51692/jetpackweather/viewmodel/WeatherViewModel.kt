@@ -42,6 +42,7 @@ class WeatherViewModel : ViewModel() {
                             winddirection = weather.current_weather.winddirection,
                             weathercode = weather.current_weather.weathercode,
                             seaLevelPressure = weather.hourly.pressure_msl[0].toFloat(),
+                            humidity = weather.hourly.relativehumidity_2m[0].toFloat(),
                             time = weather.current_weather.time,
                             isLoading = false,
                         )

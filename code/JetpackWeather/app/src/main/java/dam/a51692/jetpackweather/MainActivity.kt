@@ -16,9 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpackWeatherTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    WeatherUI()
-                }
+                WeatherUI()
             }
         }
     }
