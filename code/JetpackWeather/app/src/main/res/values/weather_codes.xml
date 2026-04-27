@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <array name="weather_codes">
+    <string-array name="weather_codes">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -30,9 +30,9 @@
         <item>95</item>
         <item>96</item>
         <item>99</item>
-    </array>
+    </string-array>
 
-    <array name="weather_descriptions">
+    <string-array name="weather_descriptions">
         <item>Clear sky</item>
         <item>Mainly clear</item>
         <item>Partly cloudy</item>
@@ -60,82 +60,38 @@
         <item>Heavy snow showers</item>
         <item>Thunderstorm</item>
         <item>Thunderstorm with hail</item>
-    </array>
+        <item>Thunderstorm with heavy hail</item>
+    </string-array>
 
-    <!-- ICONS -->
     <array name="weather_icons">
         <item>@drawable/sunny_icon</item>
         <item>@drawable/sunny_icon</item>
         <item>@drawable/sunny_icon</item>
-
         <item>@drawable/overcast_icon</item>
         <item>@drawable/overcast_icon</item>
         <item>@drawable/overcast_icon</item>
-
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
-
         <item>@drawable/freezing_icon</item>
         <item>@drawable/freezing_icon</item>
-
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
-
-        <item>@drawable/freezing_icon</item>
-        <item>@drawable/freezing_icon</item>
-
         <item>@drawable/freezing_icon</item>
         <item>@drawable/freezing_icon</item>
         <item>@drawable/freezing_icon</item>
-
+        <item>@drawable/freezing_icon</item>
+        <item>@drawable/freezing_icon</item>
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
         <item>@drawable/rain_icon</item>
-
         <item>@drawable/freezing_icon</item>
         <item>@drawable/freezing_icon</item>
-
         <item>@drawable/thunder_icon</item>
         <item>@drawable/thunder_icon</item>
         <item>@drawable/thunder_icon</item>
-    </array>
-
-    <!-- BACKGROUNDS (ONLY 2 STATES) -->
-    <array name="weather_backgrounds">
-
-        <!-- SUNNY (0,1,2) -->
-        <item>@drawable/clear_sky_day</item>
-        <item>@drawable/clear_sky_day</item>
-        <item>@drawable/clear_sky_day</item>
-
-        <!-- EVERYTHING ELSE -->
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-        <item>@drawable/overcast_sky_day</item>
-
+        <item>@drawable/thunder_icon</item>
     </array>
 
 </resources>

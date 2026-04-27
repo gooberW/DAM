@@ -1,16 +1,13 @@
 package dam.a51692.jetpackweather.ui
 
 import android.content.res.Configuration
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -30,7 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.AbsoluteAlignment
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -54,6 +53,10 @@ import dam.a51692.jetpackweather.viewmodel.WeatherViewModel
 @Composable
 fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     val weatherUIState by weatherViewModel.uiState.collectAsState()
+
+    var localLat by rememberSaveable { mutableStateOf(weatherUIState.latitude.toString()) }
+    var localLon by rememberSaveable { mutableStateOf(weatherUIState.longitude.toString()) }
+
     val latitude = weatherUIState.latitude
     val longitude = weatherUIState.longitude
     val temperature = weatherUIState.temperature
@@ -83,13 +86,16 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
         seaLevelPressure = seaLevelPressure,
         humidity = humidity,
         time = time,
-        onLatitudeChange = { newValue ->
-            newValue.toFloatOrNull()?.let { weatherViewModel.updateLatitude(it) }
-        },
-        onLongitudeChange = { newValue ->
-            newValue.toFloatOrNull()?.let { weatherViewModel.updateLongitude(it) }
-        },
-        onUpdateButtonClick = { weatherViewModel.fetchWeather() }
+        latitudeText = localLat, // texto local
+        longitudeText = localLon, // texto local
+        onLatitudeChange = { localLat = it }, // apenas o buffer local
+        onLongitudeChange = { localLon = it }, // apenas o buffer local
+        onUpdateButtonClick = {
+            // envia para o ViewModel
+            localLat.toFloatOrNull()?.let { weatherViewModel.updateLatitude(it) }
+            localLon.toFloatOrNull()?.let { weatherViewModel.updateLongitude(it) }
+            weatherViewModel.fetchWeather()
+        }
     )
 
     if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -115,6 +121,8 @@ data class WeatherUIProps(
     val onLatitudeChange: (String) -> Unit,
     val onLongitudeChange: (String) -> Unit,
     val onUpdateButtonClick: () -> Unit,
+    val latitudeText: String,
+    val longitudeText: String,
 )
 
 @Composable
@@ -130,11 +138,11 @@ fun PortraitWeatherUI(props: WeatherUIProps) {
     ) {
         LocationCard(props.latitude.toDouble(), props.longitude.toDouble())
         Spacer(modifier = Modifier.height(30.dp))
-        TemperatureCard(props.temperature, props.wIcon)
+        TemperatureCard(props.temperature, props.wIcon, props.wDescription)
         Spacer(Modifier.height(10.dp))
         CoordsCard(
-            latitude = props.latitude.toString(),
-            longitude = props.longitude.toString(),
+            latitude = props.latitudeText,
+            longitude = props.longitudeText,
             onLatitudeChange = props.onLatitudeChange,
             onLongitudeChange = props.onLongitudeChange
         )
@@ -169,7 +177,7 @@ fun LandscapeWeatherUI(props: WeatherUIProps) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            TemperatureCard(props.temperature, props.wIcon)
+            TemperatureCard(props.temperature, props.wIcon, props.wDescription)
             Spacer(Modifier.height(10.dp))
             LocationCard(props.latitude.toDouble(), props.longitude.toDouble())
         }
@@ -183,8 +191,8 @@ fun LandscapeWeatherUI(props: WeatherUIProps) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CoordsCard(
-                latitude = props.latitude.toString(),
-                longitude = props.longitude.toString(),
+                latitude = props.latitudeText,
+                longitude = props.longitudeText,
                 onLatitudeChange = props.onLatitudeChange,
                 onLongitudeChange = props.onLongitudeChange
             )
@@ -291,19 +299,21 @@ fun Preview() {
                 seaLevelPressure = 1013f,
                 humidity = 10f,
                 time = "12:00",
+                latitudeText = "",
+                longitudeText = "",
                 onLatitudeChange = {},
                 onLongitudeChange = {},
-                onUpdateButtonClick = {}
+                onUpdateButtonClick = {},
             )
         )
     }
 }
 
 @Composable
-fun TemperatureCard(temperature: Float, wIcon: Int) {
+fun TemperatureCard(temperature: Float, wIcon: Int, wDescription: String) {
     Column(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().padding(bottom = 20.dp),
         horizontalAlignment = CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -317,6 +327,11 @@ fun TemperatureCard(temperature: Float, wIcon: Int) {
             fontSize = 120.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary,
+        )
+        Text(
+            text = wDescription,
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

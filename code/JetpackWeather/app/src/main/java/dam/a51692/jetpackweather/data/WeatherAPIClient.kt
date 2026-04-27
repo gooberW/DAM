@@ -24,13 +24,13 @@ object WeatherApiClient {
             append("https://api.open-meteo.com/v1/forecast?")
             append("latitude=${lat}&longitude=${lon}&")
             append("current_weather=true&")
-            append("hourly=temperature_2m,weathercode,pressure_msl,windspeed_10m")
+            append("hourly=temperature_2m,weathercode,pressure_msl,windspeed_10m,relativehumidity_2m")
         }
         println("Getting URL: $reqString")
         return try {
             client.get(reqString).body()
         } catch (e: Exception) {
-            e.printStackTrace()
+            android.util.Log.e("WEATHER_ERROR", "Erro a ir buscar os dados do API.", e)
             null
         }
     }
