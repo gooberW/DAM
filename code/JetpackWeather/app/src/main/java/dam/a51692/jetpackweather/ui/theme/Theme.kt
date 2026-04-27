@@ -7,19 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightColors = lightColorScheme(
-    primary = Color(0xFF1976D2),
+    primary = Color(0xBA0038B2),
     onPrimary = Color.White,
     secondary = Color(0xFF03A9F4),
     onSecondary = Color.White,
     background = Color(0xFFF5F5F5),
     onBackground = Color(0xFF1C1B1F),
-    surface = Color.White,
+    surface = Color.Blue,
     onSurface = Color(0xFF1C1B1F),
 )
 
 private val DarkColors = darkColorScheme(
-    primary = Color(0xFF90CAF9),
-    onPrimary = Color(0xFF003258),
+    primary = Color(0xFF00021E),
+    onPrimary = Color.White,
     secondary = Color(0xFF81D4FA),
     onSecondary = Color(0xFF003548),
     background = Color(0xFF1C1B1F),
@@ -30,7 +30,7 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun JetpackWeatherTheme(
-    darkTheme: Boolean = false,
+    darkTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColors else LightColors
