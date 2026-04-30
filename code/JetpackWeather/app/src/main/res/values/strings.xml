@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">JetpackWeather</string>
+    <string name="current_location">Current Location:</string>
+    <string name="weather_icon">Weather Icon</string>
+    <string name="update">Update</string>
+    <string name="coordinates">Coordinates</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="direction">Direction</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
 </resources>

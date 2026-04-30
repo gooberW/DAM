@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -149,10 +150,10 @@ fun PortraitWeatherUI(props: WeatherUIProps) {
         Spacer(Modifier.height(10.dp))
         InfoGrid(
             items = listOf(
-                Triple("Wind Speed", props.windSpeed, "km/h"),
-                Triple("Wind Direction", props.windDirection.toFloat(), "°"),
-                Triple("Pressure", props.seaLevelPressure, "hPa"),
-                Triple("Humidity", props.humidity, "%"),
+                Triple(stringResource(R.string.wind_speed), props.windSpeed, "km/h"),
+                Triple(stringResource(R.string.direction), props.windDirection.toFloat(), "°"),
+                Triple(stringResource(R.string.pressure), props.seaLevelPressure, "hPa"),
+                Triple(stringResource(R.string.humidity), props.humidity, "%"),
             )
         )
         Spacer(Modifier.weight(1f))
@@ -199,10 +200,10 @@ fun LandscapeWeatherUI(props: WeatherUIProps) {
             Spacer(Modifier.height(10.dp))
             InfoGrid(
                 items = listOf(
-                    Triple("Wind Speed", props.windSpeed, "km/h"),
-                    Triple("Direction", props.windDirection.toFloat(), "°"),
-                    Triple("Pressure", props.seaLevelPressure, "hPa"),
-                    Triple("Humidity", props.humidity, "%"),
+                    Triple(stringResource(R.string.wind_speed), props.windSpeed, "km/h"),
+                    Triple(stringResource(R.string.direction), props.windDirection.toFloat(), "°"),
+                    Triple(stringResource(R.string.pressure), props.seaLevelPressure, "hPa"),
+                    Triple(stringResource(R.string.humidity), props.humidity, "%"),
                 )
             )
             Spacer(Modifier.weight(1f))
@@ -228,7 +229,7 @@ fun CoordsCard(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = "Coordinates",
+            text = stringResource(R.string.coordinates),
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onPrimary
         )
@@ -277,7 +278,7 @@ fun UpdateButton(onClick: () -> Unit) {
             contentColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
-        Text(text = "Update", fontSize = 14.sp)
+        Text(text = stringResource(R.string.update), fontSize = 14.sp)
     }
 }
 
@@ -313,13 +314,14 @@ fun Preview() {
 fun TemperatureCard(temperature: Float, wIcon: Int, wDescription: String) {
     Column(
         modifier = Modifier
-            .fillMaxWidth().padding(bottom = 20.dp),
+            .fillMaxWidth()
+            .padding(bottom = 20.dp),
         horizontalAlignment = CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(wIcon),
-            contentDescription = "Weather Icon",
+            contentDescription = stringResource(R.string.weather_icon),
             modifier = Modifier.size(80 .dp)
         )
         Text(
@@ -378,12 +380,13 @@ fun InfoGrid(items: List<Triple<String, Float, String>>) {
 @Composable
 fun LocationCard(lat: Double, lon : Double) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.primary)
             .padding(16.dp),
     ) {
-        Text(text = "Current Location:",
+        Text(text = stringResource(R.string.current_location),
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary
