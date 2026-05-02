@@ -8,8 +8,9 @@ data class WeatherUIState( // o default é lisvoa
     val winddirection: Int = 0,
     val weathercode: Int = 0,
     val seaLevelPressure: Float = 0f,
-    val humidity: Float= 0f,
+    val humidity: Float = 0f,
     val time: String = "",
     val isLoading: Boolean = false,
     val error: String? = null,
+    val is_day: Int = 0,
 )

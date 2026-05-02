@@ -1,7 +1,6 @@
 package dam.a51692.jetpackweather.data.utils
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.ui.graphics.Color
 import dam.a51692.jetpackweather.R
 
@@ -11,7 +10,7 @@ object WeatherUtils {
         return try {
             val codes = context.resources.getStringArray(R.array.weather_codes)
             codes.map { it.trim() }.indexOf(code.toString())
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             -1
         }
     }
@@ -41,12 +40,41 @@ object WeatherUtils {
         }
     }
 
-    fun getWeatherBackground(context: Context, code: Int): List<Color> = when (code) {
-        0, 1 -> listOf(Color(0xFF0068E7), Color(0xFF9ACFFF))
-        2, 3 -> listOf(Color(0xFF87CEEB), Color(0xFFB0C4DE))
-        45, 48 -> listOf(Color(0xFF708090), Color(0xFF4A4A4A))
-        in 51..67, in 80..82 -> listOf(Color(0xFF4A90D9), Color(0xFF1C3A5E))
-        in 71..77, in 85..86 -> listOf(Color(0xFFB0BEC5), Color(0xFF607D8B))
-        else -> listOf(Color(0xFF5B7FA6), Color(0xFF2C3E50))
+    fun getWeatherBackground(code: Int, isDay: Int): List<Color> = when {
+        // Clear / mostly clear
+        code == 0 || code == 1 -> if (isDay == 1)
+            listOf(Color(0xFF0068E7), Color(0xFF9ACFFF))
+        else
+            listOf(Color(0xFF0A0F2E), Color(0xFF1B2A6B))
+
+        // overcast cloudy
+        code == 2 || code == 3 -> if (isDay == 1)
+            listOf(Color(0xFF87CEEB), Color(0xFFB0C4DE))
+        else
+            listOf(Color(0xFF1C2340), Color(0xFF3A4A6B))
+
+        // Fog
+        code == 45 || code == 48 -> if (isDay == 1)
+            listOf(Color(0xFF708090), Color(0xFF4A4A4A))
+        else
+            listOf(Color(0xFF1A1E24), Color(0xFF2E3340))
+
+        //  rain / showers
+        code in 51..67 || code in 80..82 -> if (isDay == 1)
+            listOf(Color(0xFF4A90D9), Color(0xFF1C3A5E))
+        else
+            listOf(Color(0xFF0D1B2A), Color(0xFF1A2F45))
+
+        // snow
+        code in 71..77 || code in 85..86 -> if (isDay == 1)
+            listOf(Color(0xFFB0BEC5), Color(0xFF607D8B))
+        else
+            listOf(Color(0xFF1A2030), Color(0xFF2E3D52))
+
+        // thunder
+        else -> if (isDay == 1)
+            listOf(Color(0xFF5B7FA6), Color(0xFF2C3E50))
+        else
+            listOf(Color(0xFF0A0E18), Color(0xFF1A2030))
     }
 }

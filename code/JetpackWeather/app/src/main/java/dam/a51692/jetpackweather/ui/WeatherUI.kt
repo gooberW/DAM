@@ -13,9 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -67,11 +64,12 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
     val seaLevelPressure = weatherUIState.seaLevelPressure
     val humidity = weatherUIState.humidity
     val time = weatherUIState.time
+    val isDay = weatherUIState.is_day
     val configuration = LocalConfiguration.current
     val context = LocalContext.current
 
     val wIcon = WeatherUtils.getWeatherIcon(context, weathercode)
-    val wBackground: List<Color> = WeatherUtils.getWeatherBackground(context, weathercode)
+    val wBackground: List<Color> = WeatherUtils.getWeatherBackground(weathercode, isDay)
     val wDescription = WeatherUtils.getWeatherDescription(context, weathercode)
 
     val sharedProps = WeatherUIProps(
@@ -87,12 +85,12 @@ fun WeatherUI(weatherViewModel: WeatherViewModel = viewModel()) {
         seaLevelPressure = seaLevelPressure,
         humidity = humidity,
         time = time,
-        latitudeText = localLat, // texto local
-        longitudeText = localLon, // texto local
-        onLatitudeChange = { localLat = it }, // apenas o buffer local
-        onLongitudeChange = { localLon = it }, // apenas o buffer local
+        isDay = isDay,
+        latitudeText = localLat,
+        longitudeText = localLon,
+        onLatitudeChange = { localLat = it },
+        onLongitudeChange = { localLon = it },
         onUpdateButtonClick = {
-            // envia para o ViewModel
             localLat.toFloatOrNull()?.let { weatherViewModel.updateLatitude(it) }
             localLon.toFloatOrNull()?.let { weatherViewModel.updateLongitude(it) }
             weatherViewModel.fetchWeather()
@@ -119,6 +117,7 @@ data class WeatherUIProps(
     val seaLevelPressure: Float,
     val humidity: Float,
     val time: String,
+    val isDay: Int,
     val onLatitudeChange: (String) -> Unit,
     val onLongitudeChange: (String) -> Unit,
     val onUpdateButtonClick: () -> Unit,
@@ -131,7 +130,7 @@ fun PortraitWeatherUI(props: WeatherUIProps) {
     val gradient = Brush.verticalGradient(props.wBackground)
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .background(gradient)
@@ -175,7 +174,7 @@ fun LandscapeWeatherUI(props: WeatherUIProps) {
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             TemperatureCard(props.temperature, props.wIcon, props.wDescription)
@@ -189,7 +188,7 @@ fun LandscapeWeatherUI(props: WeatherUIProps) {
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = CenterHorizontally
         ) {
             CoordsCard(
                 latitude = props.latitudeText,
@@ -300,6 +299,7 @@ fun Preview() {
                 seaLevelPressure = 1013f,
                 humidity = 10f,
                 time = "12:00",
+                isDay = 0,
                 latitudeText = "",
                 longitudeText = "",
                 onLatitudeChange = {},
@@ -322,7 +322,7 @@ fun TemperatureCard(temperature: Float, wIcon: Int, wDescription: String) {
         Image(
             painter = painterResource(wIcon),
             contentDescription = stringResource(R.string.weather_icon),
-            modifier = Modifier.size(80 .dp)
+            modifier = Modifier.size(80.dp)
         )
         Text(
             text = "${temperature.toInt()}°",
@@ -339,24 +339,23 @@ fun TemperatureCard(temperature: Float, wIcon: Int, wDescription: String) {
 }
 
 @Composable
-fun InfoCard(title: String, value: Float, unit: String) {
+fun InfoCard(title: String, value: Float, unit: String, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.primary)
             .padding(16.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
-        Text (
+        Text(
             text = title,
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onPrimary
-
         )
         Spacer(modifier = Modifier.height(5.dp))
         Text(
-            text = "${value} ${unit}",
+            text = "${"%.1f".format(value)} $unit",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary
@@ -366,19 +365,27 @@ fun InfoCard(title: String, value: Float, unit: String) {
 
 @Composable
 fun InfoGrid(items: List<Triple<String, Float, String>>) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-    ) {
-        items(items) { (title, value, unit) ->
-            InfoCard(title, value, unit)
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        items.chunked(2).forEach { row ->
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                row.forEach { (title, value, unit) ->
+                    InfoCard(
+                        title = title,
+                        value = value,
+                        unit = unit,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun LocationCard(lat: Double, lon : Double) {
+fun LocationCard(lat: Double, lon: Double) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -386,13 +393,16 @@ fun LocationCard(lat: Double, lon : Double) {
             .background(MaterialTheme.colorScheme.primary)
             .padding(16.dp),
     ) {
-        Text(text = stringResource(R.string.current_location),
+        Text(
+            text = stringResource(R.string.current_location),
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onPrimary
         )
         Spacer(modifier = Modifier.width(5.dp))
-        Text(text = "${lat}, ${lon}",
-            color = MaterialTheme.colorScheme.onPrimary)
+        Text(
+            text = "${"%.4f".format(lat)}, ${"%.4f".format(lon)}",
+            color = MaterialTheme.colorScheme.onPrimary
+        )
     }
 }

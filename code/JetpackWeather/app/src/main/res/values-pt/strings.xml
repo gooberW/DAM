@@ -3,7 +3,7 @@
     <string name="app_name">JetpackWeather</string>
     <string name="coordinates">Coordenadas</string>
     <string name="wind_speed">Vel. Vento</string>
-    <string name="current_location">LOcalização Atual:</string>
+    <string name="current_location">Localização Atual:</string>
     <string name="weather_icon">Ícone</string>
     <string name="update">Atualizar</string>
     <string name="direction">Direção</string>

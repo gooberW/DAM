@@ -44,6 +44,7 @@ class WeatherViewModel : ViewModel() {
                             seaLevelPressure = weather.hourly.pressure_msl[0].toFloat(),
                             humidity = weather.hourly.relativehumidity_2m[0].toFloat(),
                             time = weather.current_weather.time,
+                            is_day = weather.current_weather.is_day,
                             isLoading = false,
                         )
                     }
@@ -55,4 +56,5 @@ class WeatherViewModel : ViewModel() {
             }
         }
     }
+
 }
