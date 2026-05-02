@@ -40,33 +40,33 @@ object WeatherUtils {
         }
     }
 
-    fun getWeatherBackground(code: Int, isDay: Int): List<Color> = when {
-        // Clear / mostly clear
-        code == 0 || code == 1 -> if (isDay == 1)
+    fun getWeatherBackground(code: Int, isDay: Int): List<Color> = when (code) {
+        //clear
+        0, 1 -> if (isDay == 1)
             listOf(Color(0xFF0068E7), Color(0xFF9ACFFF))
         else
             listOf(Color(0xFF0A0F2E), Color(0xFF1B2A6B))
 
         // overcast cloudy
-        code == 2 || code == 3 -> if (isDay == 1)
+        2, 3 -> if (isDay == 1)
             listOf(Color(0xFF87CEEB), Color(0xFFB0C4DE))
         else
             listOf(Color(0xFF1C2340), Color(0xFF3A4A6B))
 
         // Fog
-        code == 45 || code == 48 -> if (isDay == 1)
+        45, 48 -> if (isDay == 1)
             listOf(Color(0xFF708090), Color(0xFF4A4A4A))
         else
             listOf(Color(0xFF1A1E24), Color(0xFF2E3340))
 
         //  rain / showers
-        code in 51..67 || code in 80..82 -> if (isDay == 1)
+        in 51..67, in 80..82 -> if (isDay == 1)
             listOf(Color(0xFF4A90D9), Color(0xFF1C3A5E))
         else
             listOf(Color(0xFF0D1B2A), Color(0xFF1A2F45))
 
         // snow
-        code in 71..77 || code in 85..86 -> if (isDay == 1)
+        in 71..77, in 85..86 -> if (isDay == 1)
             listOf(Color(0xFFB0BEC5), Color(0xFF607D8B))
         else
             listOf(Color(0xFF1A2030), Color(0xFF2E3D52))
