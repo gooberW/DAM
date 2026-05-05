@@ -1,6 +1,6 @@
 package tp1.dam.exer_vl
 
-class Library(var name: String) {
+class Library(private var name: String) {
 
     companion object Tracker {
 
@@ -11,12 +11,12 @@ class Library(var name: String) {
         }
     }
 
-    var books = mutableListOf<Book>()
+    private var books = mutableListOf<Book>()
 
     fun addBook(book: Book) {
         books.add(book)
 
-        Tracker.numBooksAdded++
+        numBooksAdded++
     }
 
     fun borrowBook(title: String, member: LibraryMember) {
@@ -54,7 +54,7 @@ class Library(var name: String) {
 
     fun showBooks(){
         //print details of all books
-        println("${name}")
+        println(name)
         books.forEach{
             println(it)
         }
@@ -63,10 +63,10 @@ class Library(var name: String) {
     fun searchByAuthor(author: String) {
         println("Books by ${author}:")
         books.forEach{
-            if(it.author.equals(author)) {
+            if(it.author == author) {
                 var copy = "copies"
                 if(it.availableCopies == 1) copy = "copy"
-                println("- ${it.title} (${it.era}, ${it.availableCopies} ${copy} available)")
+                println("- ${it.title} (${it.era}, ${it.availableCopies} $copy available)")
             }
         }
     }

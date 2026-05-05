@@ -5,20 +5,20 @@ class PhysicalBook(
     author: String,
     publicationYear: Int,
     availableCopies: Int,
-    val weight: Int,
-    val hasHardcover: Boolean = true
+    private val weight: Int,
+    private val hasHardcover: Boolean = true
 ) : Book(title, author, publicationYear, availableCopies) {
 
     override fun getStorageInfo():String {
-        return "Storage: Physical, Weight: ${weight}, hasHardcover: ${hardcover}"
+        return "Storage: Physical, Weight: ${weight}, hasHardcover: $hardcover"
     }
 
-    val hardcover : String
+    private val hardcover : String
         get() {
-            if(hasHardcover) {
-                return "Yes"
+            return if(hasHardcover) {
+                "Yes"
             }else {
-                return "No"
+                "No"
             }
         }
 
