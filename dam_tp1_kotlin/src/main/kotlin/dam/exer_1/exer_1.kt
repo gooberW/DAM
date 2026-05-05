@@ -7,7 +7,7 @@ fun main() {
 
     // a)
     var perfectSquaresA = IntArray(size){it*it}
-    perfectSquaresA = perfectSquaresA.sliceArray(1..size-1) // corta o 0
+    perfectSquaresA = perfectSquaresA.sliceArray(1..<size) // corta o 0
     println("a) Perfect squares (first 50): ${perfectSquaresA.contentToString()}")
 
     //b)
@@ -19,10 +19,10 @@ fun main() {
 
     val perfectSquaresB = numbersB.map {it*it}
 
-    println("b) Perfect squares (first 50): ${perfectSquaresB}")
+    println("b) Perfect squares (first 50): $perfectSquaresB")
 
     //c)
-    var perfectSquaresC = Array<Int>(size) {it*it}
-    perfectSquaresC = perfectSquaresC.sliceArray(1..size-1) // corta o 0
+    var perfectSquaresC = Array(size) {it*it}
+    perfectSquaresC = perfectSquaresC.sliceArray(1..<size) // corta o 0
     println("c) Perfect squares (first 50): ${perfectSquaresC.contentToString()}")
 }

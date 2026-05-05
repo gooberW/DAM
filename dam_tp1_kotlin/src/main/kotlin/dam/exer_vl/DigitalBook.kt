@@ -5,11 +5,11 @@ class DigitalBook(
     author: String,
     publicationYear: Int,
     availableCopies: Int,
-    val fileSize: Double,
-    val format: String
+    private val fileSize: Double,
+    private val format: String
 ) : Book(title, author, publicationYear, availableCopies) {
 
     override fun getStorageInfo():String {
-        return "Storage: Digital, File Size: ${fileSize}, Format: ${format}"
+        return "Storage: Digital, File Size: ${fileSize}, Format: $format"
     }
 }

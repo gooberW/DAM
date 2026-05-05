@@ -4,7 +4,7 @@ abstract class Book (
     val title : String,
     val author : String,
     val publicationYear : Int,
-    val initialCopies: Int
+    initialCopies: Int
 ) {
     val era:String
         get() {
@@ -33,8 +33,8 @@ abstract class Book (
 
     init{
         println("New Book Created!")
-        println("Title: ${title}")
-        println("Author: ${author}")
+        println("Title: $title")
+        println("Author: $author")
         println()
     }
 }
